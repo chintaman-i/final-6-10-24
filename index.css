@@ -1,0 +1,467 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1,
+h2 {
+    color: #008080;
+    text-align: center;
+}
+
+.promo-banner {
+    background-color: #a6cf37;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+@keyframes scroll-text {
+    0% {
+        transform: translateX(100%);
+        /* right  */
+    }
+
+    100% {
+        transform: translateX(-200%);
+        /* left */
+    }
+}
+
+header {
+    background-color: #34d1bf;
+    padding: 20px 0;
+    position: relative;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    justify-content: center;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 120%;
+    margin-bottom: 20px;
+}
+
+.header-container .logo {
+    display: flex;
+    align-items: center;
+    /* Center align items vertically */
+}
+
+.header-container .logo img {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.header-container .search-bar {
+    flex-grow: 1;
+    /* Allow search bar to take remaining space */
+    margin: 0 50px;
+}
+
+.header-container .search-bar input {
+    width: 100%;
+    /* Adjust to full width of the container */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.header-container .header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Space between sign-in, sign-up, and cart */
+}
+
+.header-right a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.header-right a:hover {
+    background-color: #279f95;
+}
+
+.header-right .cart {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* Space between cart icon and text */
+}
+
+.header-right .cart img {
+    height: 24px;
+    width: 24px;
+}
+
+.category-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.category-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.category-nav a:hover {
+    background-color: #2ba99f;
+}
+
+.category-nav a img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+/* Categories Section */
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.category-item {
+    background-size: cover;
+    /* background-color: #ffffff; */
+    color: white;
+    margin: 15px;
+    padding: 20px;
+    border-radius: 00%;
+    text-align: center;
+    cursor: pointer;
+    width: calc(25% - 40px);
+    height: 150px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    border: 2px solid rgb(145, 142, 142);
+}
+
+.category-item img {
+    display: none;
+}
+
+.category-item h3 {
+    font-size: 22px;
+    position: relative;
+    z-index: 2;
+    transition: font-size 0.3s ease;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+.category-item:hover {
+    transform: scale(1.053);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* font-size: 30px; */
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+    .category-item {
+        width: calc(50% - 40px);
+        /* 2 items per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .category-item {
+        width: calc(100% - 40px);
+        /* 1 item per row */
+    }
+}
+
+/* Custom colors for each category */
+/* .category-item.vitamins {
+    background-color: #c1e5df;
+}
+
+.category-item.shampoos {
+    background-color: #fbe7c6;
+}
+
+.category-item.feminine {
+    background-color: #f8c1d9;
+}
+
+.category-item.ayurvedic {
+    background-color: #f5d4cf;
+}
+
+.category-item.skincare {
+    background-color: #c7eceb;
+} */
+.category-item.vitamins {
+    background-image: url('../images/vitaminsSupplements.jpeg');
+}
+
+.category-item.wellness {
+    background-image: url('../images/medicine.png');
+}
+
+.category-item.feminine {
+    background-image: url('../images/hygine.jpeg');
+}
+
+.category-item.ayurvedic {
+    background-image: url('../images/ayurveda.jpeg');
+}
+
+.category-item.shampoos {
+    background-image: url('../images/shampooConditioner.jpg');
+}
+
+.category-item.skincare {
+    background-image: url('../images/skincareCosmetics.jpg');
+}
+
+
+/* Why Choose Us Section */
+.whyChooseUs {
+    /* background-color: #e0f7fa; */
+    background-color: #c1e5df;
+    padding: 2rem;
+    text-align: center;
+}
+
+.whyChooseUs-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.whyChooseUs-content div {
+    width: 30%;
+    margin: 1rem;
+}
+
+.whyChooseUs-content div img {
+    height: 180px;
+    width: 260px;
+}
+
+/* Our Services Section */
+/* .ourServices {
+    padding: 2rem;
+    text-align: center;
+    background-color: #f1f1f1;
+}
+
+.services-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.services-content div {
+    width: 30%;
+    margin: 1rem;
+} */
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* .card {
+    background-color: #c1e5df;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    flex-basis: 30%;
+    transition: transform 0.3s ease;
+    margin: 20px;
+} */
+.card {
+    /* background-color: #eaf6f6; */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    flex-basis: 30%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0px 40px 60px 40px;
+}
+
+.card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    
+}
+
+h2{
+    font-size: 30px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.card p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #777;
+}
+
+.card img {
+    height: 180px;
+    width: 260px;
+}
+
+.card a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.card a:hover {
+    color: #2980b9;
+}
+
+/* Feedback Form Section */
+.feedback {
+    padding: 2rem;
+    background-color: #c1e5df;
+}
+
+.feedback form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: auto;
+}
+
+.feedback form label {
+    margin: 0.5rem 0;
+}
+
+.feedback form input,
+.feedback form select,
+.feedback form textarea {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+}
+
+.feedback form button {
+    padding: 0.7rem;
+    background-color: #008080;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.feedback form button:hover {
+    background-color: #005959;
+}
+
+/* Contact Us Section */
+.contactUs {
+    /* background-color: #f1f1f1; */
+    padding: 1rem;
+    text-align: center;
+}
+
+.contact-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.contact-content div {
+    width: 30%;
+    margin: 1rem;
+}
+
+footer {
+    /* background-color: #008080; */
+    background-color: #006666;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+/* Star Rating */
+.star-rating {
+    display: flex;
+    cursor: pointer;
+    /* Indicate that the stars are clickable */
+}
+
+.star {
+    font-size: 40px;
+    /* Size of the stars */
+    color: #ccc;
+    /* Default color for stars */
+    margin-right: 5px;
+    /* Space between stars */
+}
+
+.star:hover,
+.star.hovered {
+    color: #f5a623;
+    /* Color on hover */
+}
+
+.star.selected {
+    color: #f5a623;
+    /* Color for selected stars */
+}
+
+/* New styles for smaller screens */
+@media (max-width: 768px) {
+
+    .whyChooseUs-content div,
+    .services-content div,
+    .contact-content div {
+        width: 80%;
+        /* Adjust width for smaller screens */
+    }
+}

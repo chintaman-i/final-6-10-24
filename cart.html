@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Pharmacy Website</title>
+    <link rel="stylesheet" href="styles/cart.css">
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <img src="images/logo.jpg" alt="Logo">
+            <span style="color:white; font-size: 24px; font-weight: bolder;">Shree Medical</span>
+        </div>
+        <div class="header-actions">
+            <a href="index.html">Home</a>
+            <a href="signin.html" class="signin">
+                <span>Sign In</span>
+            </a>
+            <a href="signup.html" class="signup">
+                <span>Sign Up</span>
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="cart-container">
+    <h2>Your Cart</h2>
+    <div id="cart-items">
+        <!-- Cart items will be dynamically added here -->
+    </div>
+    <div class="cart-total">
+        Total: ₹<span id="cart-total">0</span>
+    </div>
+    <button class="checkout-button" onclick="checkout()">Checkout</button>
+    <div id="success-message" class="success-message" style="display: none;">
+        Checkout Successful! Thank you for your purchase.
+    </div>
+</div>
+<script>
+function updateCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    cartItemsContainer.innerHTML = '';
+    let cartTotal = 0;
+
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        cartTotal += itemTotal;
+
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+
+        cartItem.innerHTML = `
+            <div class="item-details">
+                <h3>${item.name}</h3>
+            </div>
+            <div class="item-price">₹${item.price}</div>
+            <div class="item-quantity">
+                <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity('${item.name}', this.value)">
+            </div>
+            <div class="item-total">₹${itemTotal}</div>
+        `;
+
+        cartItemsContainer.appendChild(cartItem);
+    });
+
+    cartTotalElement.textContent = cartTotal;
+}
+
+// Function to update quantity of a product in the cart
+function updateQuantity(productName, newQuantity) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let product = cart.find(item => item.name === productName);
+
+    if (product && newQuantity > 0) {
+        product.quantity = parseInt(newQuantity, 10); // Update the quantity
+        localStorage.setItem('cart', JSON.stringify(cart)); // Save updated cart
+        updateCart(); // Update cart display
+    }
+}
+
+// Function to handle checkout process
+function checkout() {
+    localStorage.removeItem('cart');
+    updateCart();
+    document.getElementById('success-message').style.display = 'block';
+}
+
+// Call updateCart on page load to display current cart
+updateCart();
+</script>
+
+
+
+</body>
+</html>

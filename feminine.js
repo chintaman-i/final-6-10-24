@@ -405,7 +405,8 @@ const productData = [
 
 function applyDiscount(products, discountPercentage) {
   products.forEach(product => {
-      product.price = product.price * (1 - discountPercentage / 100);
+      // Apply discount and round the price to the nearest whole number
+      product.price = Math.round(product.price * (1 - discountPercentage / 100));
   });
 }
 
@@ -430,7 +431,7 @@ function displayProducts(products) {
 
       // Product price
       const productPrice = document.createElement('p');
-      productPrice.textContent = `Price: ₹${product.price}`;
+      productPrice.textContent = `Price: ₹${product.price}`;  // Display rounded price
 
       // Add to cart button
       const addToCartButton = document.createElement('button');

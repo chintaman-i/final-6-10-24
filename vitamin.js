@@ -621,59 +621,100 @@ const productData = [
   ]
 
 
-// Function to apply a discount to all products
-function applyDiscount(products, discountPercentage) {
-products.forEach(product => {
-  // Round the price after applying the discount
-  product.price = Math.floor(product.price * (1 - discountPercentage / 100));
-});
-}
-
-// Function to display products
-function displayProducts(products) {
-const productList = document.getElementById('product-list');
-productList.innerHTML = ''; // Clear existing products
-
-products.forEach(product => {
-  // Create product card
-  const productCard = document.createElement('div');
-  productCard.className = 'product-card';
-
-  // Product image
-  const productImage = document.createElement('img');
-  productImage.src = product.Image_url;
-  productImage.alt = product.name;
-
-  // Product name
-  const productName = document.createElement('h3');
-  productName.textContent = product.name;
-
-  // Product price without decimals
-  const productPrice = document.createElement('p');
-  productPrice.textContent = `Price: ₹${product.price}`; // Display price as whole number
-
-  // Add to cart button
-  const addToCartButton = document.createElement('button');
-  addToCartButton.className = 'add-to-cart';
-  addToCartButton.textContent = 'Add to Cart';
-
-  // Add event listener to the "Add to Cart" button
-  addToCartButton.addEventListener('click', () => addToCart(product));
-
-  // Append elements to product card
-  productCard.appendChild(productImage);
-  productCard.appendChild(productName);
-  productCard.appendChild(productPrice);
-  productCard.appendChild(addToCartButton);
-
-  // Append product card to product list
-  productList.appendChild(productCard);
-});
-}
-
-// Call the functions on page load
-document.addEventListener('DOMContentLoaded', () => {
-applyDiscount(productData, 50); // Apply the discount first
-displayProducts(productData);   // Then display the discounted products
-updateCartCount();              // Update cart count
-});
+  function applyDiscount(products, discountPercentage) {
+    products.forEach(product => {
+        // Apply discount and round the price to the nearest whole number
+        product.price = Math.round(product.price * (1 - discountPercentage / 100));
+    });
+  }
+  
+  // Function to display products
+  function displayProducts(products) {
+    const productList = document.getElementById('product-list');
+    productList.innerHTML = ''; // Clear existing products
+  
+    products.forEach(product => {
+        // Create product card
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+  
+        // Product image
+        const productImage = document.createElement('img');
+        productImage.src = product.Image_url;
+        productImage.alt = product.name;
+  
+        // Product name
+        const productName = document.createElement('h3');
+        productName.textContent = product.name;
+  
+        // Product price
+        const productPrice = document.createElement('p');
+        productPrice.textContent = `Price: ₹${product.price}`;  // Display rounded price
+  
+        // Add to cart button
+        const addToCartButton = document.createElement('button');
+        addToCartButton.className = 'add-to-cart';
+        addToCartButton.textContent = 'Add to Cart';
+  
+        // Add event listener to the "Add to Cart" button
+        addToCartButton.addEventListener('click', () => addToCart(product));
+  
+        // Append elements to product card
+        productCard.appendChild(productImage);
+        productCard.appendChild(productName);
+        productCard.appendChild(productPrice);
+        productCard.appendChild(addToCartButton);
+  
+        // Append product card to product list
+        productList.appendChild(productCard);
+    });
+  }
+  
+  // Function to add product to cart
+  function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let existingItem = cart.find(item => item.name === product.name);
+  
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        const cartItem = {
+            name: product.name,
+            price: product.price,
+            quantity: 1
+        };
+        cart.push(cartItem);
+    }
+  
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    showAddToCartMessage(product.name);
+  }
+  
+  // Function to update cart count in the header
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalPrice = cart.reduce((acc, item) => acc + parseFloat(item.price * item.quantity), 0);
+    document.getElementById('cart-count').textContent = `Cart (${cart.length} items) - ₹${totalPrice.toFixed(2)}`;
+  }
+  
+  // Function to show the "Added to Cart" message
+  function showAddToCartMessage(productName) {
+    const message = document.createElement('div');
+    message.className = 'cart-message';
+    message.textContent = `${productName} has been added to your cart!`;
+  
+    document.body.appendChild(message);
+  
+    setTimeout(() => {
+        document.body.removeChild(message);
+    }, 3000);
+  }
+  
+  // Call the functions on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    applyDiscount(productData, 50); // Apply the discount first
+    displayProducts(productData);   // Then display the discounted products
+    updateCartCount();              // Update cart count
+  });
+  
